@@ -1,17 +1,34 @@
 package delivery;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+import delivery.model.Courier;
+import delivery.repository.CourierRepository;
+import delivery.repository.InMemoryCourierRepository;
+import delivery.repository.InMemoryOrderRepository;
+import delivery.repository.OrderRepository;
+import delivery.service.OrderService;
+import delivery.shipping.DeliveryMethod;
+import delivery.shipping.ExpressDelivery;
+import delivery.shipping.PickupDelivery;
+import delivery.shipping.StandardDelivery;
+import delivery.ui.ConsoleMenu;
+import delivery.ui.InputReader;
+import delivery.ui.OrderPrinter;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) {
+        OrderRepository orders = new InMemoryOrderRepository();
+        CourierRepository couriers = new InMemoryCourierRepository();
+        couriers.save(new Courier(1, "Иван Петров", "+7-900-111-11-11"));
+        couriers.save(new Courier(2, "Анна Смирнова", "+7-900-222-22-22"));
+        couriers.save(new Courier(3, "Олег Волков", "+7-900-333-33-33"));
+
+        List<DeliveryMethod> methods = List.of(
+                new StandardDelivery(), new ExpressDelivery(), new PickupDelivery());
+
+        OrderService service = new OrderService(orders, couriers);
+        new ConsoleMenu(service, new InputReader(), new OrderPrinter(), methods).run();
     }
 }

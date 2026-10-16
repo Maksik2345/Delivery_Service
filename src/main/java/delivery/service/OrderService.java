@@ -19,7 +19,6 @@ import java.util.List;
 public class OrderService {
     private final OrderRepository orders;
     private final CourierRepository couriers;
-    private long lastCustomerId = 0;
 
     public OrderService(OrderRepository orders, CourierRepository couriers) {
         this.orders = orders;
@@ -27,8 +26,8 @@ public class OrderService {
     }
 
     public Order createOrder(String customerName, String phone, String address) {
-        Customer customer = new Customer(++lastCustomerId, customerName, phone);
-        Order order = new Order(orders.nextId(), customer, address);
+        Customer customer = new Customer(customerName, phone);
+        Order order = new Order(customer, address);
         orders.save(order);
         return order;
     }

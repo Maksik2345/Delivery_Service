@@ -3,19 +3,20 @@ package delivery.model;
 import delivery.exception.CourierAssignmentException;
 
 public class Courier {
+    private static long nextId = 1;
     private final long id;
     private final String name;
     private final String phone;
     private boolean available = true; //  Курьер может выполнять только один заказ
 
-    public Courier(long id, String name, String phone) {
+    public Courier(String name, String phone) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Имя курьера не может быть пустым");
         }
         if (phone == null || phone.isBlank()) {
             throw new IllegalArgumentException("Телефон курьера не может быть пустым");
         }
-        this.id = id;
+        this.id = nextId++;
         this.name = name.trim();
         this.phone = phone.trim();
     }

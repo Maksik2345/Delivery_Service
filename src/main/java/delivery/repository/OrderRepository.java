@@ -12,6 +12,4 @@ public interface OrderRepository {
     Optional<Order> findById(long id);
 
     List<Order> findAll();
-
-    long nextId();
 }

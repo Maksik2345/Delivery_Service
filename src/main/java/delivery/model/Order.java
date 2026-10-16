@@ -11,6 +11,7 @@ import java.util.List;
 
 
 public class Order {
+    private static long nextId = 1;
     private final long id;
     private final Customer customer;
     private final String address;
@@ -19,14 +20,14 @@ public class Order {
     private Courier courier;
     private OrderStatus status = OrderStatus.CREATED;
 
-    public Order(long id, Customer customer, String address) {
+    public Order(Customer customer, String address) {
         if (customer == null) {
             throw new IllegalArgumentException("У заказа должен быть клиент");
         }
         if (address == null || address.isBlank()) {
             throw new IllegalArgumentException("Адрес доставки не может быть пустым");
         }
-        this.id = id;
+        this.id = nextId++;
         this.customer = customer;
         this.address = address.trim();
     }

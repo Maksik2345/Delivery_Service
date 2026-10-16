@@ -9,7 +9,6 @@ import java.util.Optional;
 
 public class InMemoryOrderRepository implements OrderRepository {
     private final Map<Long, Order> orders = new LinkedHashMap<>();
-    private long lastId = 0;
 
     @Override
     public void save(Order order) {
@@ -24,10 +23,5 @@ public class InMemoryOrderRepository implements OrderRepository {
     @Override
     public List<Order> findAll() {
         return List.copyOf(orders.values());
-    }
-
-    @Override
-    public long nextId() {
-        return ++lastId;
     }
 }

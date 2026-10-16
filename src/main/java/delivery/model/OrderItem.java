@@ -14,7 +14,7 @@ public class OrderItem {
         if (quantity <= 0) {
             throw new IllegalArgumentException("Количество должно быть больше 0");
         }
-        if (unitPrice ==  null || unitPrice.compareTo(BigDecimal.ZERO) < 0) {
+        if (unitPrice == null || unitPrice.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Цена не может быть отрицательной");
         }
         this.productName = productName;
@@ -22,11 +22,11 @@ public class OrderItem {
         this.unitPrice = unitPrice;
     }
 
-    public String getProductName(){
+    public String getProductName() {
         return productName;
     }
 
-    public int getQuantity(){
+    public int getQuantity() {
         return quantity;
     }
 
@@ -34,7 +34,7 @@ public class OrderItem {
         return unitPrice;
     }
 
-    public BigDecimal getTotalPrice(){
+    public BigDecimal getTotalPrice() {
         return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
 }

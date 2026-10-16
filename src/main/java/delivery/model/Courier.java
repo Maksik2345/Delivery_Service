@@ -26,6 +26,7 @@ public class Courier {
         }
         available = false;
     }
+
     // курьер освободился от заказа
     public void release() {
         available = true;

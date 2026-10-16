@@ -102,6 +102,7 @@ public class Order {
             courier.release();
         }
     }
+
     // сумма заказа без учета доставки
     public BigDecimal getItemsTotal() {
         return items.stream()

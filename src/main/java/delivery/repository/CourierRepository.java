@@ -12,6 +12,4 @@ public interface CourierRepository {
     Optional<Courier> findById(long id);
 
     List<Courier> findAll();
-
-    List<Courier> findAvailable();
 }

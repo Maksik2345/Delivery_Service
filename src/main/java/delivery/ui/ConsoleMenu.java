@@ -38,7 +38,6 @@ public class ConsoleMenu {
                         case 4 -> assignCourier();
                         case 5 -> changeStatus();
                         case 0 -> running = false;
-                        default -> System.out.println("Неизвестный пункт меню.");
                     }
                 } catch (DeliveryException | IllegalArgumentException e) {
                     System.out.println("Ошибка: " + e.getMessage());

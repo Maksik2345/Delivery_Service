@@ -24,9 +24,4 @@ public class InMemoryCourierRepository implements CourierRepository {
     public List<Courier> findAll() {
         return List.copyOf(couriers.values());
     }
-
-    @Override
-    public List<Courier> findAvailable() {
-        return couriers.values().stream().filter(Courier::isAvailable).toList();
-    }
 }

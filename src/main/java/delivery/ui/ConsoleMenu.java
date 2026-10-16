@@ -80,34 +80,35 @@ public class ConsoleMenu {
     }
 
     private void chooseDelivery() {
-        long orderId = readOrderId();
+        Order order = readOrder();
         printer.printMethods(methods);
         int index = input.readInt("Способ доставки", 1, methods.size());
-        printer.printQuote(service.chooseDelivery(orderId, methods.get(index - 1)));
+        printer.printQuote(service.chooseDelivery(order.getId(), methods.get(index - 1)));
     }
 
     private void assignCourier() {
-        long orderId = readOrderId();
+        Order order = readOrder();
         printer.printCouriers(service.getCouriers());
         int courierId = input.readInt("Номер курьера", 1, Integer.MAX_VALUE);
-        service.assignCourier(orderId, courierId);
+        service.assignCourier(order.getId(), courierId);
         System.out.println("Курьер назначен.");
-        printer.printOrder(service.getOrder(orderId));
+        printer.printOrder(order);
     }
 
     private void changeStatus() {
-        long orderId = readOrderId();
+        Order order = readOrder();
         OrderStatus[] statuses = OrderStatus.values();
         for (int i = 0; i < statuses.length; i++) {
             System.out.println((i + 1) + ". " + statuses[i].getTitle());
         }
         int index = input.readInt("Новый статус", 1, statuses.length);
-        service.changeStatus(orderId, statuses[index - 1]);
+        service.changeStatus(order.getId(), statuses[index - 1]);
         System.out.println("Статус изменён.");
-        printer.printOrder(service.getOrder(orderId));
+        printer.printOrder(order);
     }
 
-    private long readOrderId() {
-        return input.readInt("Номер заказа", 1, Integer.MAX_VALUE);
+    private Order readOrder() {
+        long orderId = input.readInt("Номер заказа", 1, Integer.MAX_VALUE);
+        return service.getOrder(orderId);
     }
 }

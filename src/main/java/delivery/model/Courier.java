@@ -21,7 +21,7 @@ public class Courier {
         this.phone = phone.trim();
     }
 
-    public void assign() {
+    void assign() {
         if (!available) {
             throw new CourierAssignmentException("Курьер " + name + " уже занят другим заказом");
         }
@@ -29,7 +29,7 @@ public class Courier {
     }
 
     // курьер освободился от заказа
-    public void release() {
+    void release() {
         available = true;
     }
 

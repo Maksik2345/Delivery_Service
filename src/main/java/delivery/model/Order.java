@@ -80,6 +80,9 @@ public class Order {
     }
 
     public void changeStatus(OrderStatus next) {
+        if (next == null) {
+            throw new IllegalArgumentException("Новый статус не указан");
+        }
         if (!status.canTransitionTo(next)) {
             throw new InvalidStatusTransitionException(status, next);
         }
